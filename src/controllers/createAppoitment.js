@@ -2,9 +2,9 @@ import db from '../../database/models/index.js'
 
 const {appointment} =db
 
-const createAppoitment= async (req,res)=>{
-    try {
-        const {name,email,date_appo,addi_info}=req.body
+const createAppoitment= async (req, res) => {
+  try {
+      const {name, email, date_appo, addi_info} = req.body
         const newAppointment = await appointment.create({
             name,
             email,
@@ -25,7 +25,9 @@ const createAppoitment= async (req,res)=>{
           });
 
     } catch (error) {
-        return error.message
+      return res.status(500).json({
+        message: error.message,
+      });
     }
 }
 
