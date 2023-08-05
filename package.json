@@ -4,16 +4,21 @@
   "main": "server.js",
   "scripts": {
     "build": "rm -rf build && babel src --out-dir build",
-    "start": "nodemon src/server.js",
-    "migrate": "npx sequelize-cli db:migrate"
+    "start": "npm run babel && nodemon --exec babel-node src/server.js",
+    "lint:fix": "eslint --fix \"**/*.js\"",
+    "migrate": "npx sequelize-cli db:migrate",
+    "babel": "babel src/server.js -d dist --presets @babel/preset-modules"
   },
   "dependencies": {
     "@babel/cli": "^7.22.9",
     "@babel/core": "^7.22.9",
     "@babel/node": "^7.22.6",
     "@babel/plugin-proposal-class-properties": "^7.18.6",
+    "@babel/plugin-proposal-object-rest-spread": "^7.20.7",
     "@babel/plugin-transform-runtime": "^7.22.9",
+    "@babel/polyfill": "^7.12.1",
     "@babel/preset-env": "^7.22.9",
+    "@babel/preset-modules": "^0.1.6",
     "@babel/register": "^7.22.5",
     "body-parser": "^1.20.2",
     "cors": "^2.8.5",
@@ -28,6 +33,7 @@
   "license": "ISC",
   "description": "",
   "devDependencies": {
+    "eslint": "^8.46.0",
     "sequelize-cli": "^6.6.1"
   }
 }
